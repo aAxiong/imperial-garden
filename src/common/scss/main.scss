@@ -1,0 +1,82 @@
+@media (-webkit-min-device-pixel-ratio: 1.5),
+(min-device-pixel-ratio: 1.5) {
+    .border-1px &::after {
+        -webkit-transform: scaleY(0.7);
+        transform: scaleY(0.7);
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-device-pixel-ratio: 2) {
+    .border-1px &::after {
+        -webkit-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+    }
+}
+
+.clearfix {
+    display: inline-block;
+    &:after {
+        display: block;
+        content: ".";
+        height: 0;
+        line-height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+}
+
+
+/* 滚动条样式 */
+
+.recommend-content {
+    height: 100%;
+    overflow: hidden;
+}
+
+.imgcover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+// 空白页面置顶
+.blankgap {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: #fff;
+    min-height: 100%;
+    height: auto;
+    z-index: 3;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+    opacity: 0
+}
+
+.child-view {
+    position: absolute;
+    transition: all .5s cubic-bezier(.55, 0, .1, 1);
+}
+
+.slide-left-enter,
+.slide-right-leave-active {
+    opacity: 0;
+    -webkit-transform: translate(30px, 0);
+    transform: translate(30px, 0);
+}
+
+.slide-left-leave-active,
+.slide-right-enter {
+    opacity: 0;
+    -webkit-transform: translate(-30px, 0);
+    transform: translate(-30px, 0);
+}

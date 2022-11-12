@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>Test Ws mqtt.js</title>
+</head>
+<body>
+    <script src="./browserMqtt.js"></script>
+    <script src="./jquery.js"></script>
+    <script>
+        // 虽然使用的是 MQTT，但底层还是使用 WebSocket 实现的，所以这里的端口需要使用 ActiveMQ 里 WS 的端口 61614，而不是 MQTT 的端口 1883
+        // var client = mqtt.connect('ws://szleonardo.ddns.net:8083/mqtt'); // you add a ws:// url here
+        var client = mqtt.connect('ws://39.108.160.202:9001/mqtt'); // you add a ws:// url here
+        
+        client.subscribe('foo'); // 订阅 Topic
+        client.on('message', function(topic, payload) {
+            console.log([payload].join('')); // 提取消息需要使用 [].join()
+
+            $("#msg").html($("#msg").html() + "<br> <font color='red'>AlertLog : </font>" + [payload].join('') );
+        })
+        client.publish('foo', 'Hello World!'); // 发送消息
+        // 不停的发送消息进行测试
+        setInterval(function() {
+            client.publish('foo',  'Time: ' + new Date().getTime());
+            $("#msg").html($("#msg").html() + "<br> <font color='red'>AlertLog : </font>" + 'Time: ' + new Date().getTime() );
+        }, 1000);
+    </script>
+</body>
+
+<p id="msg">info:<br></p> 
+</html>
